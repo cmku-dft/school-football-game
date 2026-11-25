@@ -28,7 +28,19 @@ A small 4-a-side schoolyard football game for touch screens. It runs in Safari o
 
 On the title screen, pick Wen or Mei, then press Kick off.
 
-Each match lasts 90 seconds. Win to face the next grade (Grade 4, 5, then 6). A draw goes to next-goal-wins.
+Each match lasts 90 seconds. A draw goes to next-goal-wins.
+
+## The season / ฤดูกาลแข่งขัน
+
+You play for class 4/1 and face 13 classes in order. Progress is saved on the device.
+
+| Grade | Classes | How they play |
+|---|---|---|
+| 4 | 4/2 to 4/7 | Fast runners with wild shooting |
+| 5 | 5/1 to 5/4 | Short passers who work the ball close |
+| 6 | 6/3, 6/2, 6/1 | Big kids; bumping into them knocks you over |
+
+Every class has its own named players and a captain with a special move: Lightning Dash, Spin Dodge, Banana Shot, Rocket Shot or Bulldozer. The screen before each match shows the captain and a tip for beating the move. Losing a match makes the rematch slightly easier.
 
 The language button in the top-right corner of the title screen switches between English and Thai.
 
