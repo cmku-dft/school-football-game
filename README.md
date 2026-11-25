@@ -32,11 +32,11 @@ Each match lasts 90 seconds. A draw goes to next-goal-wins.
 
 ## The season / ฤดูกาลแข่งขัน
 
-You play for class 4/1 and face 13 classes in order. Progress is saved on the device.
+You play for class 4/3 and face the 13 other classes in order. Progress is saved on the device.
 
 | Grade | Classes | How they play |
 |---|---|---|
-| 4 | 4/2 to 4/7 | Fast runners with wild shooting |
+| 4 | 4/1, 4/2, 4/4 to 4/7 | Fast runners with wild shooting |
 | 5 | 5/1 to 5/4 | Short passers who work the ball close |
 | 6 | 6/3, 6/2, 6/1 | Big kids; bumping into them knocks you over |
 
