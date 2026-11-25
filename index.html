@@ -72,7 +72,9 @@ th:{title:'แข้งน้อยหลังเลิกเรียน',sub:
   goal:'โกลลล!!',goalSub:'ห้องเราได้ประตู',conceded:'โดนยิง…',concededSub:'ไม่เป็นไร เอาคืนเลย!',
   champ:'แชมป์โรงเรียน!',win:'ชนะแล้ว!',lose:'แพ้นิดเดียวเอง',champSub:'ชนะครบทุกชั้นแล้ว เก่งที่สุดในโรงเรียน',nextUp:'นัดต่อไปเจอรุ่นพี่ ',
   loseSub:'ลองใหม่ ส่งบอลให้เพื่อนบ่อยๆ แล้วยิงลูกไฟ',tapAgain:'แตะจอเพื่อเริ่มใหม่',tapNext:'แตะจอเพื่อแข่งนัดต่อไป',tapRematch:'แตะจอเพื่อแก้มือ',
-  rotate:'หมุนจอเป็นแนวนอนจะเล่นง่ายกว่า',school:'โรงเรียนแข้งน้อยวิทยา',choose:'เลือกตัวผู้เล่น',wen:'เหวิน',mei:'เหมย',start:'เริ่มเตะ!',scores:' ยิงเข้า!',menu:'เปลี่ยนตัวผู้เล่น',hero:'ต้น',langBtn:'English',
+  rotate:'หมุนจอเป็นแนวนอนจะเล่นง่ายกว่า',school:'โรงเรียนแข้งน้อยวิทยา',rowsKb:[['W A S D','วิ่ง (ใช้ปุ่มลูกศรก็ได้)'],['คลิกซ้าย','กดค้างเพื่อชาร์จ เล็งด้วยเมาส์ (หรือกด Space)'],['คลิกขวา','ส่งไปทางที่เมาส์ชี้ หรือขอบอล (หรือกด K)'],['ไม่มีบอล','คลิกซ้ายหรือ Space เพื่อแย่งบอล']],
+  hint:'WASD วิ่ง   ·   คลิกซ้าย / Space ยิง   ·   คลิกขวา / K ส่ง   ·   P หยุดพัก',paused:'หยุดพัก',pausedSub:'กด P เพื่อเล่นต่อ',
+  choose:'เลือกตัวผู้เล่น',wen:'เหวิน',mei:'เหมย',start:'เริ่มเตะ!',scores:' ยิงเข้า!',menu:'เปลี่ยนตัวผู้เล่น',hero:'ต้น',langBtn:'English',
   aria:'เกมเตะบอลหลังเลิกเรียน ใช้นิ้วซ้ายลากเพื่อวิ่ง ปุ่มขวาเพื่อยิงและส่งบอล'},
 en:{title:'After-School Kickers',sub:'Play football with your friends in the schoolyard and beat Grade 4 to Grade 6',
   rows:[['Left thumb','Drag to run'],['Shoot','Hold to charge. A full bar is a fire shot'],['Pass','Pass to a friend, or call for the ball'],['No ball','Press Tackle to lunge for the ball']],
@@ -82,7 +84,9 @@ en:{title:'After-School Kickers',sub:'Play football with your friends in the sch
   goal:'GOAL!!',goalSub:'Our class scores',conceded:'They scored…',concededSub:'No worries, get it back!',
   champ:'School champions!',win:'You win!',lose:'So close!',champSub:'You beat every grade. Best in the school',nextUp:'Next up: ',
   loseSub:'Try again. Pass to your friends and use the fire shot',tapAgain:'Tap to play again',tapNext:'Tap for the next match',tapRematch:'Tap for a rematch',
-  rotate:'Turn the screen sideways for easier play',school:'KICKERS PRIMARY SCHOOL',choose:'Choose your player',wen:'Wen',mei:'Mei',start:'Kick off!',scores:' scores!',menu:'Change player',hero:'Ton',langBtn:'ภาษาไทย',
+  rotate:'Turn the screen sideways for easier play',school:'KICKERS PRIMARY SCHOOL',rowsKb:[['W A S D','Run (arrow keys also work)'],['Left click','Hold to charge, aim with the mouse (or Space)'],['Right click','Pass toward the pointer, or call for the ball (or K)'],['No ball','Left click or Space to tackle']],
+  hint:'WASD run   ·   Left click / Space shoot   ·   Right click / K pass   ·   P pause',paused:'Paused',pausedSub:'Press P to continue',
+  choose:'Choose your player',wen:'Wen',mei:'Mei',start:'Kick off!',scores:' scores!',menu:'Change player',hero:'Ton',langBtn:'ภาษาไทย',
   aria:'After-school football game. Drag with your left thumb to run, use the right buttons to shoot and pass'}
 };
 function tr(k){return TX[LANG][k];}
@@ -114,7 +118,7 @@ var ROLES=['gk','def','mid','fwd'];
 var HOME={gk:[28,300],def:[220,300],mid:[400,180],fwd:[470,410]};
 
 var G={state:'title',level:0,score:[0,0],time:90,golden:false,freeze:0,goalT:0,shake:0,t:0,
-       banner:null,endT:0,lastScorer:0,concede:0,over:false,win:false,champion:false,flash:0,hit:0,goalE:9,scorer:null,side:0,netHit:[{t:9,y:300,a:0},{t:9,y:300,a:0}]};
+       banner:null,endT:0,lastScorer:0,concede:0,over:false,win:false,champion:false,paused:false,flash:0,hit:0,goalE:9,scorer:null,side:0,netHit:[{t:9,y:300,a:0},{t:9,y:300,a:0}]};
 var players=[],hero=null,ball=null,parts=[],crowd=[];
 var dog={on:false,x:0,y:0,vx:0,vy:0,t:0,next:20,hit:false,bub:0};
 
@@ -212,7 +216,7 @@ function kickoff(team,silent){
   if(!silent) sfx.whistle();
 }
 function startMatch(){
-  setupMatch();G.state='play';sfx.whistle();
+  G.paused=false;setupMatch();G.state='play';sfx.whistle();
   setBanner(tr('vs')+cls(G.level)+tr('go'),1.6);
 }
 function setBanner(t,d){G.banner={text:t,t:d,d:d};}
@@ -222,6 +226,8 @@ function say(p,t,d){p.bub={text:t,t:d||1.1};}
 var joy={id:null,ox:0,oy:0,x:0,y:0};
 var bShoot={id:null,down:false},bPass={id:null,down:false};
 var keys={};
+var MODE=('ontouchstart' in window)?'touch':'kb',mouse={x:0,y:0,used:false},mShoot=false;
+function maim(){return {x:(mouse.x-OX)/SC,y:(mouse.y-OY)/SC};}
 function btnPos(){
   return {shoot:{x:W-100*U,y:H-105*U,r:58*U},pass:{x:W-225*U,y:H-68*U,r:46*U}};
 }
@@ -234,15 +240,16 @@ function pressShoot(){
     dust(hero.x,hero.y,5);sfx.pass();
   }
 }
-function releaseShoot(){
+function releaseShoot(aim){
   if(hero&&hero.charging){
-    if(ball.owner===hero&&G.state==='play') heroShoot();
+    if(ball.owner===hero&&G.state==='play') heroShoot(aim);
     hero.charging=false;hero.charge=0;
   }
 }
-function pressPass(){
+function pressPass(aim){
   if(G.state!=='play'||G.freeze>0) return;
   if(ball.owner===hero){
+    if(aim){var ad=hyp(aim.x-hero.x,aim.y-hero.y);if(ad>12){hero.fx=(aim.x-hero.x)/ad;hero.fy=(aim.y-hero.y)/ad;}}
     var t=pickMate(hero,true);
     if(t) passTo(hero,t);
   }else{
@@ -286,7 +293,7 @@ function tEnd(id){
   if(bShoot.id===id){bShoot.id=null;bShoot.down=false;releaseShoot();}
   if(bPass.id===id){bPass.id=null;bPass.down=false;}
 }
-cv.addEventListener('touchstart',function(e){e.preventDefault();
+cv.addEventListener('touchstart',function(e){e.preventDefault();MODE='touch';
   for(var i=0;i<e.changedTouches.length;i++){var t=e.changedTouches[i];tStart(t.identifier,t.clientX,t.clientY);}
 },{passive:false});
 cv.addEventListener('touchmove',function(e){e.preventDefault();
@@ -304,18 +311,31 @@ cv.addEventListener('touchcancel',function(e){e.preventDefault();
   for(var i=0;i<e.changedTouches.length;i++) tEnd(e.changedTouches[i].identifier);
 },{passive:false});
 var mdown=false;
-cv.addEventListener('mousedown',function(e){initAudio();mdown=true;tStart('m',e.clientX,e.clientY);});
-window.addEventListener('mousemove',function(e){if(mdown) tMove('m',e.clientX,e.clientY);});
-window.addEventListener('mouseup',function(e){if(!mdown) return;mdown=false;var wasMenu=G.state!=='play';tEnd('m');if(wasMenu) menuTap(e.clientX,e.clientY);});
+cv.addEventListener('mousedown',function(e){
+  initAudio();MODE='kb';mouse.used=true;mouse.x=e.clientX;mouse.y=e.clientY;mdown=true;
+  if(G.state!=='play'||G.paused) return;
+  e.preventDefault();
+  if(e.button===0){mShoot=true;pressShoot();}
+  else if(e.button===2){pressPass(maim());}
+});
+cv.addEventListener('contextmenu',function(e){e.preventDefault();});
+window.addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY;});
+window.addEventListener('mouseup',function(e){
+  if(!mdown) return;mdown=false;mouse.x=e.clientX;mouse.y=e.clientY;
+  if(G.state!=='play'){ if(e.button===0) menuTap(e.clientX,e.clientY); return; }
+  if(e.button===0&&mShoot){mShoot=false;releaseShoot(maim());}
+});
 window.addEventListener('keydown',function(e){
   var k=e.key.toLowerCase();
   if(k===' '||k.indexOf('arrow')===0) e.preventDefault();
   if(keys[k]) return; keys[k]=true;
-  initAudio();
+  initAudio();MODE='kb';
+  if(G.state==='play'&&(k==='p'||k==='escape')){G.paused=!G.paused;return;}
+  if(G.paused) return;
   if(G.state!=='play'){ if(k==='enter'||k===' ') menuTap(); if(k==='l') setLang(LANG==='th'?'en':'th');
     if(G.state==='title'&&(k==='arrowleft'||k==='arrowright')) setChar(k==='arrowleft'?'wen':'mei'); return; }
   if(k===' '||k==='j') pressShoot();
-  if(k==='k'||k==='x') pressPass();
+  if(k==='k'||k==='x'||k==='e') pressPass();
 });
 window.addEventListener('keyup',function(e){
   var k=e.key.toLowerCase();keys[k]=false;
@@ -337,11 +357,12 @@ function kickBall(p,tx,ty,speed,lift,isShot,fire){
   dust(p.x,p.y,isShot?7:3);
   if(isShot){ring(ball.x,ball.y-5,fire?34:22,fire?'#ffd23f':'#fdfbf3');if(fire||speed>700) sparks(ball.x,ball.y-6,fire?9:4);}
 }
-function heroShoot(){
+function heroShoot(aim){
   var c=clamp(hero.charge,0,1),fire=c>=0.95;
   var gx=FW,dx=gx-hero.x,dy=MIDY-hero.y,d=hyp(dx,dy)||1;
   var cos=(dx*hero.fx+dy*hero.fy)/d,tx,ty;
-  if(hero.x>FW*0.3&&cos>0.55){
+  if(aim&&hyp(aim.x-hero.x,aim.y-hero.y)>12){tx=aim.x;ty=aim.y;}
+  else if(hero.x>FW*0.3&&cos>0.55){
     var side=clamp((hero.fy-dy/d)*2.4,-1,1);
     tx=gx;ty=MIDY+side*GH*0.82;
   }else{tx=hero.x+hero.fx*100;ty=hero.y+hero.fy*100;}
@@ -1239,7 +1260,7 @@ function drawTitle(cx){
     font(25*U);ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=INK;
     ctx.fillText(tr(c.id),c.x+c.w/2,c.y+c.h-24*U,c.w-20*U);
   }
-  var P=L.panel,rows=tr('rows'),cols=['#ffd23f','#ff6a3d','#3aa0e8','#ff6a3d'],cw=P.w/2;
+  var P=L.panel,rows=tr(MODE==='kb'?'rowsKb':'rows'),cols=['#ffd23f','#ff6a3d','#3aa0e8','#ff6a3d'],cw=P.w/2;
   ctx.fillStyle='rgba(253,251,243,.94)';rr(ctx,P.x,P.y,P.w,P.h,16*U);ctx.fill();
   for(i=0;i<4;i++){
     var rx=P.x+(i%2)*cw+14*U,ry=P.y+26*U+Math.floor(i/2)*40*U;
@@ -1272,7 +1293,14 @@ function drawHUD(){
   var s=Math.ceil(G.time);
   ctx.fillText(G.golden?tr('golden'):(Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60)),cx,ty+13*U);
 }
+function drawKbHint(){
+  var t=tr('hint');font(15*U,500);
+  var w=Math.min(W-24,ctx.measureText(t).width+36*U),h=34*U,x=W/2-w/2,y=H-h-10*U;
+  ctx.fillStyle='rgba(43,29,20,.72)';rr(ctx,x,y,w,h,h/2);ctx.fill();
+  ctx.fillStyle='#fdfbf3';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(t,W/2,y+h/2+1,w-24*U);
+}
 function drawControls(){
+  if(MODE==='kb'){drawKbHint();return;}
   var b=btnPos(),has=ball.owner===hero;
   var jx=joy.id!==null?joy.ox:105*U,jy=joy.id!==null?joy.oy:H-110*U,R=55*U;
   ctx.fillStyle='rgba(43,29,20,'+(joy.id!==null?0.28:0.16)+')';circ(ctx,jx,jy,R+10*U);
@@ -1322,6 +1350,7 @@ function drawOverlay(){
       pill(menuBtn(),'#3a2a1e',tr('menu'),20*U,'#ffd23f');
     }
   }
+  if(G.paused&&G.state==='play'){ctx.fillStyle='rgba(43,29,20,.6)';ctx.fillRect(0,0,W,H);stext(tr('paused'),cx,cy-20*U,64*U,'#ffd23f');stext(tr('pausedSub'),cx,cy+40*U,26*U,'#fdfbf3');}
   if(G.state==='title'||G.state==='end') drawLangBtn();
   if(H>W*1.1){stext(tr('rotate'),cx,H-28*U,18*U,'#fdfbf3',4*U);}
 }
@@ -1373,6 +1402,15 @@ function draw(){
     ctx.fillStyle='rgba(43,29,20,.75)';var hn=heroName(),nw=ctx.measureText(hn).width+10;
     rr(ctx,hero.x-nw/2,hero.y+9,nw,16,6);ctx.fill();ctx.fillStyle='#ffd23f';ctx.fillText(hn,hero.x,hero.y+17);
   }
+  if(MODE==='kb'&&mouse.used&&G.state==='play'&&G.freeze<=0&&ball.owner===hero){
+    var am=maim();
+    ctx.strokeStyle='rgba(253,251,243,.7)';ctx.lineWidth=2.5;
+    if(ctx.setLineDash) ctx.setLineDash([7,7]);
+    ctx.beginPath();ctx.moveTo(hero.x,hero.y-4);ctx.lineTo(am.x,am.y);ctx.stroke();
+    if(ctx.setLineDash) ctx.setLineDash([]);
+    ctx.strokeStyle=INK;ctx.lineWidth=4;ctx.beginPath();ctx.arc(am.x,am.y,9,0,TAU);ctx.stroke();
+    ctx.strokeStyle='#ffd23f';ctx.lineWidth=2.2;ctx.beginPath();ctx.arc(am.x,am.y,9,0,TAU);ctx.stroke();
+  }
   ctx.setTransform(DPR,0,0,DPR,0,0);
   if(G.flash>0){ctx.fillStyle='rgba(255,255,255,'+Math.min(0.55,G.flash*2).toFixed(2)+')';ctx.fillRect(0,0,W,H);}
   if(G.state==='play'||G.state==='goal'){drawHUD();}
@@ -1392,7 +1430,7 @@ function frame(ts){
     if(W<2||H<2||!bg||!bg.width||!bg.height) return;
     acc+=dt;
     var n=0;
-    while(acc>=STEP&&n<4){update(STEP);acc-=STEP;n++;}
+    while(acc>=STEP&&n<4){if(!G.paused) update(STEP);acc-=STEP;n++;}
     if(n===4) acc=0;
     draw();
   }catch(e){
@@ -1404,7 +1442,7 @@ window.addEventListener('orientationchange',function(){setTimeout(resize,250);})
 document.addEventListener('visibilitychange',function(){last=performance.now();acc=0;});
 mkBall();initCrowd();resize();setLang(LANG);setupMatch();G.state='title';G.freeze=0;
 if(document.fonts&&document.fonts.load){try{document.fonts.load('600 20px Mitr','แข้ง').then(function(){if(W>1&&cv.width>1) buildBg();},function(){});}catch(e){}}
-window.__game={G:G,update:update,draw:draw,start:menuTap,joy:joy,pressShoot:pressShoot,releaseShoot:releaseShoot,pressPass:pressPass,
+window.__game={G:G,update:update,draw:draw,start:menuTap,joy:joy,pressShoot:pressShoot,releaseShoot:releaseShoot,pressPass:pressPass,setMode:function(m){MODE=m;},
   get ball(){return ball;},get hero(){return hero;}};
 requestAnimationFrame(frame);
 })();
