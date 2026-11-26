@@ -8,21 +8,28 @@ A small 4-a-side schoolyard football game for touch screens. It runs in Safari o
 
 ## How to play / วิธีเล่น
 
-| Control | English | ไทย |
+| Touch control | English | ไทย |
 |---|---|---|
 | Left thumb | Drag anywhere to run | ลากเพื่อวิ่ง |
-| Shoot | Hold to charge; a full bar is a fire shot | กดค้างให้หลอดเต็มจะได้ลูกยิงไฟ |
-| Pass | Pass to a friend, or call for the ball | ส่งให้เพื่อน หรือขอบอล |
-| No ball | Shoot becomes Tackle (lunge for the ball) | ปุ่มยิงกลายเป็นแย่งบอล |
+| Run (hold) | Sprint; it drains stamina, and at zero you are tired and slow | วิ่งเร็ว แต่เหนื่อยได้ |
+| Shoot / Tackle | Hold to shoot harder; without the ball, lunge for it | ยิง หรือพุ่งแย่ง |
+| Pass / Switch | Pass to a friend; when the other team has the ball, switch to the friend nearest it | ส่ง หรือสลับตัว |
+| Dodge | Spin as a defender tackles and they fall over | หมุนตัวหลบ |
+
+**Special meter.** Completed passes, tackles and dodges fill the meter. When it is full, Wen's next shot is a Fire Shot (straight and very fast) and Mei's is a Curve Shot (bends around the keeper).
+
+**Switch players** can be turned off on the title screen; then you always control Wen or Mei.
 
 ### Keyboard and mouse / คีย์บอร์ดและเมาส์
 
 | Input | Action |
 |---|---|
 | W A S D or arrow keys | Run / วิ่ง |
-| Left click (hold) or Space / J | Shoot; with the mouse the shot goes toward the pointer / ยิง (เมาส์เล็งทิศได้) |
-| Right click or K / X / E | Pass toward the pointer, or call for the ball / ส่ง หรือขอบอล |
-| Left click or Space without the ball | Tackle / แย่งบอล |
+| Shift (hold) | Sprint / วิ่งเร็ว |
+| Left click (hold) or Space / J | Shoot toward the pointer; without the ball, tackle / ยิง หรือแย่ง |
+| Right click or K / X / E | Pass, call for the ball, or switch player / ส่ง ขอบอล หรือสลับตัว |
+| Q or F | Dodge / หลบ |
+| Tab or R | Switch player / สลับตัว |
 | P or Esc | Pause / หยุดพัก |
 | L (on menus) | Switch language / เปลี่ยนภาษา |
 
