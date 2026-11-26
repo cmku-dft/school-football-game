@@ -51,6 +51,14 @@ Every class has its own named players and a captain with a special move: Lightni
 
 The language button in the top-right corner of the title screen switches between English and Thai.
 
+## Stars, shop and trophies / ดาว ร้านค้า ถ้วยรางวัล
+
+- Every match has three stars: win the match, plus two side goals shown before kick-off (for example win by two, keep a clean sheet, score with the special shot, complete six passes). Stars are only awarded for a win.
+- **Matches** on the title screen lets you replay any class you have reached to collect missing stars.
+- **Shop** spends stars on balls, headbands, hairstyles and goal celebrations. There are 39 stars in total, exactly enough to buy everything.
+- **Trophies** shows 12 trophies and lifetime stats (goals, wins, best winning streak, passes, dodges and more).
+- Everything is saved in the browser's local storage on that device.
+
 ## Technical notes
 
 - One file: `index.html` (plain HTML5 canvas and Web Audio, no build step, no dependencies apart from one Google Font).
