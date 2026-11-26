@@ -35,7 +35,20 @@ A small 4-a-side schoolyard football game for touch screens. It runs in Safari o
 
 On the title screen, pick Wen or Mei, then press Kick off.
 
-Each match lasts 90 seconds. A draw goes to next-goal-wins.
+A match lasts 2 minutes by default; the Time button beside Kick off switches between 1:30, 2:00, 3:00 and 5:00. A draw goes to next-goal-wins.
+
+## Pitches and weather / สนามและสภาพอากาศ
+
+| Condition | Where in the season | Effect |
+|---|---|---|
+| Sunny evening | Grade 4 | Normal |
+| Blazing sun | 4/7 | Stamina drains faster; a water bottle on the pitch refills it |
+| Rain | 5/1, 5/3 | The ball skids, players slide, puddles stop the ball |
+| Windy | 5/2, 5/4 | Wind pushes the ball, more so in the air; an arrow shows direction |
+| Concrete yard | 6/3, 6/2 | The ball runs fast and bounces hard off the walls |
+| Dusk | 6/1 | Floodlights, visual only |
+
+Once you have reached a condition in the season, the Pitch button on the pre-match screen lets you pick it for any match.
 
 ## The season / ฤดูกาลแข่งขัน
 
