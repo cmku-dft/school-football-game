@@ -72,6 +72,13 @@ The language button in the top-right corner of the title screen switches between
 - **Trophies** shows 12 trophies and lifetime stats (goals, wins, best winning streak, passes, dodges and more).
 - Everything is saved in the browser's local storage on that device.
 
+## Team, coins and training / จัดทีม เหรียญ ฝึกซ้อม
+
+- **Recruit captains.** Earn all three stars against a class and its captain joins your squad. On the Team screen you choose who plays defender and midfielder. Recruited captains keep their move: as teammates they use it on their own, and when you control one, shooters (Rocket, Banana) fire it with a full special meter while the others give a passive bonus (faster sprint, quicker dodge, knocking rivals over while sprinting).
+- **Coins.** Every match pays coins for goals, passes, tackles, dodges and winning. Coins can be earned again and again, unlike stars.
+- **Special shots.** Coins buy Zigzag, Split and Smash shots; one is in use at a time in place of the default Fire or Curve shot.
+- **Training.** Coins raise your main player's speed, stamina and shot power, three levels each.
+
 ## Technical notes
 
 - One file: `index.html` (plain HTML5 canvas and Web Audio, no build step, no dependencies apart from one Google Font).
